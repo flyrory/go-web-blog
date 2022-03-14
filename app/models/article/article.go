@@ -1,13 +1,14 @@
 package article
 
 import (
+	"github.com/flyrory/go-web-blog/app/models"
 	"github.com/flyrory/go-web-blog/pkg/route"
 	"github.com/flyrory/go-web-blog/pkg/types"
 )
 
 // Article 文章模型
 type Article struct {
-	ID    uint64
+	models.BaseModel
 	Title string
 	Body  string
 }
