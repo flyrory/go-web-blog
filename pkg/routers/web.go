@@ -11,11 +11,11 @@ import (
 func RegisterWebRoutes(r *mux.Router) {
 	// 静态页面
 	pc := new(controllers.PagesController)
-	//主页
-	r.HandleFunc("/", pc.Home).Methods("GET").Name("home")
 	//关于我们
 	r.HandleFunc("/about", pc.About).Methods("GET").Name("about")
 	ac := new(controllers.ArticlesController)
+	//主页
+	r.HandleFunc("/", ac.Index).Methods("GET").Name("home")
 	//文章详情
 	r.HandleFunc("/articles/{id:[0-9]+}", ac.Show).Methods("GET").Name("articles.show")
 	//文章列表
@@ -44,6 +44,8 @@ func RegisterWebRoutes(r *mux.Router) {
 	//用户登录
 	r.HandleFunc("/auth/login", auc.Login).Methods("GET").Name("auth.login")
 	r.HandleFunc("/auth/dologin", auc.DoLogin).Methods("POST").Name("auth.dologin")
+	//用户退出
+	r.HandleFunc("/auth/logout", auc.Logout).Methods("POST").Name("auth.logout")
 	r.NotFoundHandler = http.HandlerFunc(pc.NotFound)
 
 	r.Use(middlewares.StartSession)
