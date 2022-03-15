@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/flyrory/go-web-blog/app/models/article"
+	"github.com/flyrory/go-web-blog/app/models/category"
 	"github.com/flyrory/go-web-blog/app/models/user"
 	"github.com/flyrory/go-web-blog/model"
 	"github.com/flyrory/go-web-blog/pkg/config"
@@ -36,5 +37,6 @@ func migration(db *gorm.DB) {
 	db.AutoMigrate(
 		&user.User{},
 		&article.Article{},
+		&category.Category{},
 	)
 }

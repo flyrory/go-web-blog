@@ -3,6 +3,7 @@ package route
 import (
 	"net/http"
 
+	"github.com/flyrory/go-web-blog/pkg/config"
 	"github.com/flyrory/go-web-blog/pkg/logger"
 	"github.com/gorilla/mux"
 )
@@ -14,7 +15,7 @@ func SetRoute(r *mux.Router) {
 	router = r
 }
 
-// RouteName2URL 通过路由名称来获取 URL
+// Name2URL 通过路由名称来获取 URL
 func Name2URL(routeName string, pairs ...string) string {
 	url, err := router.Get(routeName).URL(pairs...)
 	if err != nil {
@@ -22,7 +23,7 @@ func Name2URL(routeName string, pairs ...string) string {
 		return ""
 	}
 
-	return url.String()
+	return config.GetString("app.url") + url.String()
 }
 
 // GetRouteVariable 获取 URI 路由参数
