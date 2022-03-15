@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/flyrory/go-web-blog/pkg/auth"
+	"github.com/flyrory/go-web-blog/pkg/flash"
 	"github.com/flyrory/go-web-blog/pkg/logger"
 	"github.com/flyrory/go-web-blog/pkg/route"
 )
@@ -29,6 +30,8 @@ func RenderTemplate(w io.Writer, name string, data D, tplFiles ...string) {
 
 	// 1. 通用模板数据
 	data["isLogined"] = auth.Check()
+	data["loginUser"] = auth.User
+	data["flash"] = flash.All()
 
 	// 2. 生成模板文件
 	allFiles := getTemplateFiles(tplFiles...)
